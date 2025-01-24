@@ -1,4 +1,19 @@
 <?php
+
+session_start();
+
+ini_set('display_errors','Off');
+
+// Check if the user is logged in
+if (isset($_SESSION['email'])) {
+    header('Location: index.php'); // Redirect to login page if not logged in
+    exit;
+}
+
+// Welcome message
+$role = $_SESSION['role'];
+$name = $_SESSION['name'];
+
 // Include the logic file to handle the registration logic
 include './php/Registration-form.php';
 ?>
@@ -101,5 +116,7 @@ include './php/Registration-form.php';
         <button type="submit">Register</button>
     </div>
     </form>
+
+    <p>Already have an account <a href="./Login-form.php">Click Here</a></p>
 </body>
 </html>

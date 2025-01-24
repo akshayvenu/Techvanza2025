@@ -1,4 +1,19 @@
 <?php
+
+session_start();
+
+ini_set('display_errors','Off');
+
+// Check if the user is logged in
+if (isset($_SESSION['email'])) {
+    header('Location: index.php'); // Redirect to login page if not logged in
+    exit;
+}
+
+// Welcome message
+$role = $_SESSION['role'];
+$name = $_SESSION['name'];
+
 // Include the logic file to handle the login logic
 include './php/Login-form.php';
 ?>
@@ -34,6 +49,7 @@ include './php/Login-form.php';
 
         <label for="email">Email:</label>
         <input type="email" id="email" name="email"><br><br>
+        <!-- <p style="margin-left:30%; margin-bottom:1%;">Forgot Your Password ? <a href="./php/Forgot-password.php">Click Here</a></p> -->
 
         <label for="password">Password:</label>
         <input type="password" id="password" name="password"><br><br>
@@ -41,5 +57,7 @@ include './php/Login-form.php';
         <button type="submit">Login</button>
     </div>
     </form>
+
+    <p>Don't have an account <a href="./Registration-form.php">Click Here</a></p>
 </body>
 </html>

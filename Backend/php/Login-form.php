@@ -1,8 +1,10 @@
 <?php
+session_start(); // Start session
+
 // Initialize message variable
 $message = "";
 
-// Database connection (adjust with your own credentials)
+// Database connection
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -22,36 +24,58 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    // Validate the required fields
+    // Validate required fields
     if (empty($role) || empty($email) || empty($password)) {
         $message = "<p style='color: red;'>Please fill in all required fields.</p>";
     } else {
-        // Check user role and validate credentials
+        // Select appropriate table based on the role
         if ($role == "NormalUser") {
-            $sql = "SELECT * FROM NormalUser WHERE email = '$email'";
+            $sql = "SELECT * FROM NormalUser WHERE email = ?";
         } elseif ($role == "WorkerUser") {
-            $sql = "SELECT * FROM WorkerUser WHERE email = '$email'";
+            $sql = "SELECT * FROM WorkerUser WHERE email = ?";
         } else {
             $message = "<p style='color: red;'>Invalid role selected.</p>";
         }
 
-        // Execute the query to check the user in the corresponding table
-        $result = $conn->query($sql);
+        if (isset($sql)) {
+            // Prepare statement
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("s", $email);
+            $stmt->execute();
+            $result = $stmt->get_result();
 
-        if ($result->num_rows > 0) {
-            // Fetch user data
-            $user = $result->fetch_assoc();
+            if ($result->num_rows > 0) {
+                // Fetch user data
+                $user = $result->fetch_assoc();
 
-            // Verify the password
-            if (password_verify($password, $user['password'])) {
-                $message = "<p style='color: green;'>Login successful. Welcome, " . $user['name'] . "!</p>";
-                header('Location: dashboard.php');
-                exit;
+                // Verify password
+                if (password_verify($password, $user['password'])) {
+                    // Save user details in session
+                    $_SESSION['role'] = $role;
+                    $_SESSION['id'] = $user['id'];
+                    $_SESSION['name'] = $user['name'];
+                    $_SESSION['email'] = $user['email'];
+
+                    if ($role == "NormalUser") {
+                        $_SESSION['contact'] = $user['contact'];
+                        $_SESSION['locations'] = $user['locations'];
+                        $_SESSION['gender'] = $user['gender'];
+                    } elseif ($role == "WorkerUser") {
+                        $_SESSION['dateOfBirth'] = $user['dateOfBirth'];
+                        $_SESSION['gender'] = $user['gender'];
+                    }
+
+                    // Redirect to dashboard
+                    header('Location: index.php');
+                    exit;
+                } else {
+                    $message = "<p style='color: red;'>Incorrect password.</p>";
+                }
             } else {
-                $message = "<p style='color: red;'>Incorrect password.</p>";
+                $message = "<p style='color: red;'>No user found with the given email.</p>";
             }
-        } else {
-            $message = "<p style='color: red;'>No user found with the given email.</p>";
+
+            $stmt->close();
         }
     }
 }
