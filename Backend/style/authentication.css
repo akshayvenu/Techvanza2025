@@ -1,0 +1,188 @@
+/* Navbar styles */
+.navbar {
+  background-color: #1976d2;
+  height: 15vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 50px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: white;
+}
+
+.navbar .title {
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.navbar .tagline {
+  font-size: 18px;
+  font-style: italic;
+  color: #e0e0e0;
+}
+
+/* Body and container styles */
+body {
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to right, #e3f2fd, #bbdefb);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+h2 {
+  text-align: center;
+  margin: 30px 0;
+  font-size: 28px;
+  color: #333;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Registration box styles */
+.register-box {
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  width: 700px;
+  max-width: 90%;
+  margin: 20px 0;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Form element styles */
+label {
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+  color: #1976d2;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  border: 2px solid #ccc;
+  font-size: 16px;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+  background-color: #f9f9f9;
+}
+
+input:focus,
+select:focus {
+  border-color: #1976d2;
+  box-shadow: 0 0 8px rgba(25, 118, 210, 0.2);
+  outline: none;
+  background-color: #fff;
+}
+
+input::placeholder {
+  font-style: italic;
+  color: #aaa;
+}
+
+/* Role-based fields */
+#normalUserFields,
+#workerUserFields {
+  display: none;
+  padding: 20px;
+  background: #f3f6f9;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+}
+
+/* Button styles */
+button {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(45deg, #1976d2, #42a5f5);
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: linear-gradient(45deg, #155aa8, #2196f3);
+  transform: translateY(-3px);
+}
+
+button:active {
+  background: linear-gradient(45deg, #0e447a, #1976d2);
+  transform: translateY(0);
+}
+
+/* Add subtle animations to input and labels */
+input,
+select,
+label {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    height: auto;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .navbar .title {
+    font-size: 28px;
+  }
+
+  .navbar .tagline {
+    font-size: 14px;
+  }
+
+  h2 {
+    font-size: 24px;
+    margin: 20px 0;
+  }
+
+  .register-box {
+    padding: 20px;
+  }
+
+  label {
+    font-size: 14px;
+  }
+
+  input,
+  select {
+    font-size: 14px;
+  }
+
+  button {
+    font-size: 16px;
+    padding: 12px;
+  }
+}

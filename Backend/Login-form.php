@@ -9,14 +9,22 @@ include './php/Login-form.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link href="./style/authentication.css" rel="stylesheet">
 </head>
 <body>
+
+    <div class="navbar">
+        <span class="title">आशाएं</span>
+        <span class="tagline">" नवीन दिशा, नई उम्मीदें "</span>
+    </div>
+
     <h2>User Login</h2>
 
     <!-- Display dynamic message -->
     <?php echo $message; ?>
 
     <form action="" method="POST">
+    <div class="register-box">
         <label for="role">Select Role:</label>
         <select name="role" id="role">
             <option value="">--Select Role--</option>
@@ -31,6 +39,7 @@ include './php/Login-form.php';
         <input type="password" id="password" name="password"><br><br>
 
         <button type="submit">Login</button>
+    </div>
     </form>
 </body>
 </html>

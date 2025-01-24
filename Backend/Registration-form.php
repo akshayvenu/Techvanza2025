@@ -8,7 +8,8 @@ include './php/Registration-form.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration Form</title>
+    <title>Registration</title>
+    <link href="./style/authentication.css" rel="stylesheet">
     <script>
         // Function to show/hide fields based on selected role
         function toggleFormFields() {
@@ -28,12 +29,19 @@ include './php/Registration-form.php';
     </script>
 </head>
 <body>
+
+    <div class="navbar">
+        <span class="title">आशाएं</span>
+        <span class="tagline">" नवीन दिशा, नई उम्मीदें "</span>
+    </div>
+
     <h2>User Registration</h2>
 
     <!-- Display dynamic message -->
     <?php echo $message; ?>
 
     <form action="" method="POST">
+    <div class="register-box">
         <label for="role">Select Role:</label>
         <select name="role" id="role" onchange="toggleFormFields()">
             <option value="">--Select Role--</option>
@@ -91,6 +99,7 @@ include './php/Registration-form.php';
         </div>
 
         <button type="submit">Register</button>
+    </div>
     </form>
 </body>
 </html>
